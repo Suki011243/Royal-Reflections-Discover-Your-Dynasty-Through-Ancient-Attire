@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dynasty Personality Quiz</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Open+Sans&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Open Sans', sans-serif;
+      background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+                  url('tang chao.webp') no-repeat center center fixed;
+      background-size: cover;
+      color: #f5f5f5;
+      padding: 2rem;
+    }
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      text-align: center;
+    }
+    .quiz-container {
+      max-width: 800px;
+      margin: 2rem auto;
+      background: #fff;
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+    .question {
+      margin-bottom: 1.5rem;
+    }
+    .question label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+    input[type="radio"] {
+      margin-right: 0.5rem;
+    }
+    button {
+      background-color: #007bff;
+      color: white;
+      padding: 0.7rem 1.5rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    #result {
+      margin-top: 1.5rem;
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+    .back-link {
+      display: block;
+      text-align: center;
+      margin-top: 2rem;
+      color: #007bff;
+      text-decoration: none;
+    }
+      @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <h1>Which Dynasty Do You Belong To?</h1>
+  <div class="quiz-container" style="text-align: center; background-color: rgba(255, 255, 255, 0.95); border: 2px solid #ddd; animation: fadeIn 1s ease-in-out; color: #000;">
+    <form id="dynastyQuiz">
+      <div class="question">
+        <label style="font-family: 'Playfair Display', serif; font-size: 1.4rem; color: #333; margin-bottom: 0.8rem;">1. What's your fashion preference?</label>
+        <input type="radio" name="q1" value="han"> Simple & traditional<br>
+        <input type="radio" name="q1" value="tang"> Luxurious & colorful<br>
+        <input type="radio" name="q1" value="qin"> Practical & powerful<br>
+        <input type="radio" name="q1" value="song"> Elegant & literary<br>
+      </div>
+
+      <div class="question">
+        <label>2. How would your friends describe you?</label>
+        <input type="radio" name="q2" value="han"> Thoughtful<br>
+        <input type="radio" name="q2" value="tang"> Creative<br>
+        <input type="radio" name="q2" value="qin"> Ambitious<br>
+        <input type="radio" name="q2" value="song"> Calm<br>
+      </div>
+
+      <div class="question">
+        <label>3. What's your ideal past-time?</label>
+        <input type="radio" name="q3" value="han"> Reading Confucius<br>
+        <input type="radio" name="q3" value="tang"> Attending performances<br>
+        <input type="radio" name="q3" value="qin"> Planning strategies<br>
+        <input type="radio" name="q3" value="song"> Writing poetry<br>
+      </div>
+
+      <button type="button" onclick="showResult()">See My Dynasty!</button>
+    </form>
+    <p id="result"></p>
+  </div>
+
+  <a class="back-link" href="Default.html">&#8592; Back to Main Page</a>
+
+  <script>
+    function showResult() {
+      const answers = [...document.querySelectorAll('input[type="radio"]:checked')].map(el => el.value);
+      if (answers.length < 3) {
+        document.getElementById("result").innerText = "❗ Please answer all questions.";
+        return;
+      }
+      const count = {};
+      answers.forEach(a => count[a] = (count[a] || 0) + 1);
+      const result = Object.entries(count).sort((a,b) => b[1]-a[1])[0][0];
+
+      const dynastyText = {
+        han: "🧧 You belong to the Han Dynasty — Thoughtful and Wise!",
+        tang: "🎨 You belong to the Tang Dynasty — Artistic and Refined!",
+        qin: "⚔️ You belong to the Qin Dynasty — Bold and Strategic!",
+        song: "📜 You belong to the Song Dynasty — Calm and Poetic!"
+      };
+
+      document.getElementById("result").innerText = dynastyText[result];
+    }
+  </script>
+</body>
+</html>
